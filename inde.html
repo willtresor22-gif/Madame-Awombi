@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chelsy Queen ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    background: radial-gradient(circle at center, #200000, #000);
+    color: white;
+    font-family: 'Georgia', serif;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+.container {
+    padding: 30px 20px;
+}
+
+/* Rose */
+.rose {
+    margin: 30px auto;
+    width: 90px;
+    height: 90px;
+    background: crimson;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    animation: pulse 2s infinite;
+    position: relative;
+}
+
+.rose::before,
+.rose::after {
+    content: '';
+    width: 90px;
+    height: 90px;
+    background: crimson;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.rose::before { top: -45px; left: 0; }
+.rose::after { left: 45px; top: 0; }
+
+@keyframes pulse {
+    0% { transform: rotate(-45deg) scale(1); }
+    50% { transform: rotate(-45deg) scale(1.15); }
+    100% { transform: rotate(-45deg) scale(1); }
+}
+
+/* Hearts */
+.heart {
+    position: fixed;
+    top: -10px;
+    font-size: 20px;
+    animation: fall linear infinite;
+    color: red;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh);
+        opacity: 0;
+    }
+}
+
+h1 {
+    color: crimson;
+    font-size: 26px;
+}
+
+p {
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+#final {
+    margin-top: 30px;
+    font-size: 22px;
+    color: pink;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 5px pink; }
+    to { text-shadow: 0 0 20px red; }
+}
+</style>
+</head>
+
+<body onclick="startMusic()">
+
+<div class="container">
+
+<div class="rose"></div>
+
+<h1>Chelsy Queen 👑💖</h1>
+
+<p>
+Depuis que tu es entrée dans ma vie, tout a changé de couleur.<br>
+Tu es la douceur dans mes tempêtes, la lumière dans mes doutes,
+la paix dans mes combats.<br><br>
+
+Chelsy Queen… tu règnes sur mon cœur avec tendresse et élégance.<br>
+Mi Mujer… mon choix, ma fierté.<br>
+One Love… un amour sincère, fort et destiné.<br><br>
+
+Avec toi, j’ai compris que l’amour est une promesse quotidienne.<br><br>
+
+Je te choisis aujourd’hui, demain et pour toujours. ❤️✨
+</p>
+
+<div id="final">
+💖✨ Joyeuse Saint-Valentin Chelsy ✨💖
+</div>
+
+</div>
+
+<script>
+/* Petite ambiance douce */
+let audioStarted = false;
+
+function startMusic() {
+    if(audioStarted) return;
+    audioStarted = true;
+
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(220, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(330, ctx.currentTime + 3);
+
+    gain.gain.setValueAtTime(0.05, ctx.currentTime);
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start();
+    osc.stop(ctx.currentTime + 4);
+}
+
+/* Hearts animation */
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+}
+setInterval(createHeart, 300);
+</script>
+
+</body>
+</html>
